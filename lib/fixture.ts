@@ -40,34 +40,31 @@ export function buildGroupMatches(): GroupMatch[] {
   return matches
 }
 
-// Round of 32 layout. 12 group winners + 12 runners-up + 8 best third-placed.
-// Designed as a clean binary tree feeding the rest of the bracket.
+// Round of 32 oficial 2026, ya confirmado tras el cierre de la fase de
+// grupos (28 jun 2026). Los 16 cruces están fijos: 12 ganadores de grupo,
+// 12 segundos y los 8 mejores terceros, ya determinados.
 interface R32Def {
-  home:
-    | { type: "group"; group: GroupId; pos: 1 | 2 }
-    | { type: "third"; index: number }
-  away:
-    | { type: "group"; group: GroupId; pos: 1 | 2 }
-    | { type: "third"; index: number }
+  home: { type: "team"; teamId: string }
+  away: { type: "team"; teamId: string }
 }
 
 const R32_DEFS: R32Def[] = [
-  { home: { type: "group", group: "A", pos: 1 }, away: { type: "third", index: 0 } }, // M1
-  { home: { type: "group", group: "C", pos: 1 }, away: { type: "group", group: "F", pos: 2 } }, // M2
-  { home: { type: "group", group: "E", pos: 1 }, away: { type: "third", index: 1 } }, // M3
-  { home: { type: "group", group: "G", pos: 1 }, away: { type: "group", group: "B", pos: 2 } }, // M4
-  { home: { type: "group", group: "I", pos: 1 }, away: { type: "third", index: 2 } }, // M5
-  { home: { type: "group", group: "K", pos: 1 }, away: { type: "group", group: "J", pos: 2 } }, // M6
-  { home: { type: "group", group: "B", pos: 1 }, away: { type: "third", index: 3 } }, // M7
-  { home: { type: "group", group: "D", pos: 1 }, away: { type: "group", group: "H", pos: 2 } }, // M8
-  { home: { type: "group", group: "F", pos: 1 }, away: { type: "third", index: 4 } }, // M9
-  { home: { type: "group", group: "H", pos: 1 }, away: { type: "group", group: "A", pos: 2 } }, // M10
-  { home: { type: "group", group: "J", pos: 1 }, away: { type: "third", index: 5 } }, // M11
-  { home: { type: "group", group: "L", pos: 1 }, away: { type: "group", group: "D", pos: 2 } }, // M12
-  { home: { type: "group", group: "C", pos: 2 }, away: { type: "third", index: 6 } }, // M13
-  { home: { type: "group", group: "E", pos: 2 }, away: { type: "group", group: "L", pos: 2 } }, // M14
-  { home: { type: "group", group: "G", pos: 2 }, away: { type: "third", index: 7 } }, // M15
-  { home: { type: "group", group: "I", pos: 2 }, away: { type: "group", group: "K", pos: 2 } }, // M16
+  { home: { type: "team", teamId: "RSA" }, away: { type: "team", teamId: "CAN" } }, // M73
+  { home: { type: "team", teamId: "GER" }, away: { type: "team", teamId: "PAR" } }, // M74
+  { home: { type: "team", teamId: "NED" }, away: { type: "team", teamId: "MAR" } }, // M75
+  { home: { type: "team", teamId: "BRA" }, away: { type: "team", teamId: "JPN" } }, // M76
+  { home: { type: "team", teamId: "FRA" }, away: { type: "team", teamId: "SWE" } }, // M77
+  { home: { type: "team", teamId: "CIV" }, away: { type: "team", teamId: "NOR" } }, // M78
+  { home: { type: "team", teamId: "MEX" }, away: { type: "team", teamId: "ECU" } }, // M79
+  { home: { type: "team", teamId: "ENG" }, away: { type: "team", teamId: "COD" } }, // M80
+  { home: { type: "team", teamId: "USA" }, away: { type: "team", teamId: "BIH" } }, // M81
+  { home: { type: "team", teamId: "BEL" }, away: { type: "team", teamId: "SEN" } }, // M82
+  { home: { type: "team", teamId: "POR" }, away: { type: "team", teamId: "CRO" } }, // M83
+  { home: { type: "team", teamId: "ESP" }, away: { type: "team", teamId: "AUT" } }, // M84
+  { home: { type: "team", teamId: "SUI" }, away: { type: "team", teamId: "ALG" } }, // M85
+  { home: { type: "team", teamId: "ARG" }, away: { type: "team", teamId: "CPV" } }, // M86
+  { home: { type: "team", teamId: "COL" }, away: { type: "team", teamId: "GHA" } }, // M87
+  { home: { type: "team", teamId: "AUS" }, away: { type: "team", teamId: "EGY" } }, // M88
 ]
 
 function emptyKnockout(

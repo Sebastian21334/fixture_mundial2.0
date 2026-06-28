@@ -79,6 +79,9 @@ function TeamRow({
 export function KnockoutMatchCard({ match, compact }: Props) {
   const { resolvedKnockout, setKnockoutResult } = useTournament()
   const resolved = resolvedKnockout.get(match.id)
+    console.log("MATCH:", match)
+  console.log("HOME:", match.home)
+  console.log("AWAY:", match.away)
 
   const tied =
     match.homeGoals !== null &&

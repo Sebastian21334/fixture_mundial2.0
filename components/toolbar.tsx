@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -115,68 +116,72 @@ export function Toolbar({ exportTargetId }: { exportTargetId: string }) {
       >
         {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
       </Button>
-
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="gap-2">
-            {exporting ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Download className="size-4" />
-            )}
-            <span className="hidden sm:inline">Exportar</span>
-          </Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger>
+            <span className="inline-flex items-center gap-2 border rounded px-3 py-1.5 text-sm cursor-pointer">
+              {exporting ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Download className="size-4" />
+              )}
+              <span className="hidden sm:inline">Exportar</span>
+            </span>
+          </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Exportar fixture</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => runExport("png")}
-            disabled={exporting !== null}
-          >
-            <ImageIcon className="size-4" />
-            Exportar a PNG
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => runExport("pdf")}
-            disabled={exporting !== null}
-          >
-            <FileText className="size-4" />
-            Exportar a PDF
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => window.print()}>
-            <Printer className="size-4" />
-            Imprimir
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Exportar fixture</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem onClick={() => runExport("png")} disabled={exporting !== null}>
+              <ImageIcon className="size-4" />
+              Exportar a PNG
+            </DropdownMenuItem>
+
+            <DropdownMenuItem onClick={() => runExport("pdf")} disabled={exporting !== null}>
+              <FileText className="size-4" />
+              Exportar a PDF
+            </DropdownMenuItem>
+
+            <DropdownMenuItem onClick={() => window.print()}>
+              <Printer className="size-4" />
+              Imprimir
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+      </DropdownMenuContent>
       </DropdownMenu>
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="gap-2">
-            <Settings className="size-4" />
-            <span className="hidden sm:inline">Gestión</span>
-          </Button>
-        </DropdownMenuTrigger>
+      <DropdownMenuTrigger>
+        <span className="inline-flex items-center gap-2 border rounded px-3 py-1.5 text-sm cursor-pointer">
+          <Download className="size-4" />
+          Herramientas
+        </span>
+      </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Herramientas</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setConfirm("new")}>
-            <FilePlus2 className="size-4" />
-            Nuevo torneo
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setConfirm("reset")}>
-            <RotateCcw className="size-4" />
-            Reiniciar resultados
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setConfirm("clearKnockout")}>
-            <Eraser className="size-4" />
-            Limpiar eliminatorias
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setConfirm("restore")}>
-            <Undo2 className="size-4" />
-            Restaurar valores iniciales
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Herramientas</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem onClick={() => setConfirm("new")}>
+              <FilePlus2 className="size-4" />
+              Nuevo torneo
+            </DropdownMenuItem>
+
+            <DropdownMenuItem onClick={() => setConfirm("reset")}>
+              <RotateCcw className="size-4" />
+              Reiniciar resultados
+            </DropdownMenuItem>
+
+            <DropdownMenuItem onClick={() => setConfirm("clearKnockout")}>
+              <Eraser className="size-4" />
+              Limpiar eliminatorias
+            </DropdownMenuItem>
+
+            <DropdownMenuItem onClick={() => setConfirm("restore")}>
+              <Undo2 className="size-4" />
+              Restaurar valores iniciales
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
 

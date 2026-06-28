@@ -195,6 +195,13 @@ export function resolveKnockout(
           placeholder: `Perdedor ${labelForMatch(byId, ref.matchId)}`,
         }
       }
+      case "team": {
+        const team = getTeam(ref.teamId)
+        return {
+          teamId: ref.teamId,
+          placeholder: team?.name ?? ref.teamId,
+        }
+      }
     }
   }
 

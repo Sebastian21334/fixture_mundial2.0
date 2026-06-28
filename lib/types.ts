@@ -43,6 +43,7 @@ export type SlotRef =
   | { type: "third"; index: number }
   | { type: "winner"; matchId: string }
   | { type: "loser"; matchId: string }
+  | { type: "team"; teamId: string } // equipo fijo ya conocido (hardcodeado)
 
 export type KnockoutRound =
   | "R32"
